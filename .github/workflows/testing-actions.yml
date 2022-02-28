@@ -9,9 +9,9 @@ jobs:
       matrix:
         include:
           - python-version: 3.7
-            tox-env: 'py37, docs, flake8'
+            tox-env: 'py37, flake8'
           - python-version: 3.8
-            tox-env: 'py38, docs, flake8'
+            tox-env: 'py38, flake8'
 
     steps:
       - uses: actions/checkout@v2
