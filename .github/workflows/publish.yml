@@ -51,4 +51,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $IMAGE_NAME:latest
+          tags: ${{env.IMAGE_NAME}}:latest
