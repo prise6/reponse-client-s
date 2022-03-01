@@ -1,17 +1,13 @@
-Welcome to Reponse Client's documentation!
-===========================================================
+Bienvenue sur la documentation de la réponse du client S
+=========================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    README
-   installation
    usage
    modules
-   CONTRIBUTING
-   AUTHORS
-   HISTORY
 
 Indices and tables
 ==================

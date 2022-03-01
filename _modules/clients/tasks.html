@@ -1,37 +1,72 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>clients.tasks &#8212; Reponse Client 0.1.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clients.tasks &mdash; Reponse Client 0.1.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Reponse Client
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Reponse Client S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clients</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Reponse Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>clients.tasks</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Source code for clients.tasks</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Module des jobs pour le cli&quot;&quot;&quot;</span>
 
@@ -49,6 +84,25 @@
 
 <div class="viewcode-block" id="read_and_format_data"><a class="viewcode-back" href="../../clients.html#clients.tasks.read_and_format_data">[docs]</a><span class="k">def</span> <span class="nf">read_and_format_data</span><span class="p">(</span><span class="n">pubmed_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">clinical_trials_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">drug_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                          <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Job data de lecture et format des données à partir des fichiers bruts.</span>
+<span class="sd">    Sauvegarde les données sous format json dans `output_directory`:</span>
+
+<span class="sd">    * pubmeds.json</span>
+<span class="sd">    * clinical_trials.json</span>
+<span class="sd">    * drugs.json</span>
+<span class="sd">    * journals.json</span>
+
+<span class="sd">    Cette étape peut être découpée si besoin. L&#39;hypothèse est que les données bruts doivent</span>
+<span class="sd">    être nettoyées et consolider afin d&#39;être exploitées par la suite.</span>
+<span class="sd">    Dans la réalité, les données bruts sont souvent déversés dans un datalake puis structurer</span>
+<span class="sd">    (nettoyage, création d&#39;identifiant, base relationnel, ...) dans un stockage adapté et requêtable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pubmed_files (List[str]): chemins des données bruts</span>
+<span class="sd">        clinical_trials_file (str): chemin des données bruts</span>
+<span class="sd">        drug_file (str): chemin des données bruts</span>
+<span class="sd">        output_directory (str): répertoire de sauvegarde des données json</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">pubmeds</span> <span class="o">=</span> <span class="n">read_and_format_pubmed</span><span class="p">(</span><span class="n">pubmed_files</span><span class="p">)</span>
         <span class="n">clinical_trials</span> <span class="o">=</span> <span class="n">read_and_format_clinical_trials</span><span class="p">(</span><span class="n">clinical_trials_file</span><span class="p">)</span>
@@ -70,6 +124,25 @@
 
 
 <div class="viewcode-block" id="export_graph"><a class="viewcode-back" href="../../clients.html#clients.tasks.export_graph">[docs]</a><span class="k">def</span> <span class="nf">export_graph</span><span class="p">(</span><span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">json_graph_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Job de création et export du graph des liaisons entre les différentes entités</span>
+<span class="sd">    (molécules, publications, essais cliniques, journaux).</span>
+
+<span class="sd">    Cette étape correspond à la manipulation métier des données structurées dans un but précis.</span>
+<span class="sd">    Ici, il est nécessaire de retravailler les données pour les stocker sous un format de graph.</span>
+<span class="sd">    Idéalement, on devrait s&#39;appuyer sur une base de données orientée graph (Neo4j par ex.) et donc</span>
+<span class="sd">    modéliser les noeuds et les liaisons dans cette base.</span>
+
+<span class="sd">    Ici, j&#39;ai voulu apprendre à utiliser les dataclasses de python, j&#39;en ai profiter avec ce projet</span>
+<span class="sd">    pour créer une classe Graph et des classes Nodes simples.</span>
+<span class="sd">    La complexité des recherches de liaisons est forcément impactée si les données sont volumineuses.</span>
+
+<span class="sd">    L&#39;object Graph grâce à dataclasses peut être exporté et importé facilement sous forme de dictionnaire</span>
+<span class="sd">    (et donc json)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input_directory (str): répertoire de sauvegarde des données json du job :func:`~read_and_format_data`</span>
+<span class="sd">        json_graph_file (str): chemin du fichier json du graph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">build_graph</span><span class="p">(</span>
@@ -91,6 +164,15 @@
 
 
 <div class="viewcode-block" id="print_drug_mention"><a class="viewcode-back" href="../../clients.html#clients.tasks.print_drug_mention">[docs]</a><span class="k">def</span> <span class="nf">print_drug_mention</span><span class="p">(</span><span class="n">json_graph_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">drug_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Afficher les liaisons d&#39;une molécule. Voir :func:`~clients.graph.Graph.get_drugs_mentions`.</span>
+
+<span class="sd">    Cette étape correspond à l&#39;exploitation d&#39;une base graph. C&#39;est à dire l&#39;usage de python pour</span>
+<span class="sd">    requêter en un language adapté la base de données graph (ex cypher pour Neo4j, comme SQL pour le relationnel)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_graph_file (str): chemin du fichier json du graph</span>
+<span class="sd">        drug_names (List[str]): liste des molécules</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json_graph_file</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -100,6 +182,16 @@
 
 
 <div class="viewcode-block" id="export_journals_with_distinct_mention"><a class="viewcode-back" href="../../clients.html#clients.tasks.export_journals_with_distinct_mention">[docs]</a><span class="k">def</span> <span class="nf">export_journals_with_distinct_mention</span><span class="p">(</span><span class="n">json_graph_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Retourne une tableau de données des journaux avec le nombre distinct de molécules mentionnées.</span>
+
+<span class="sd">    Correspond à une étape d&#39;exploitation d&#39;une base prête à l&#39;emploi également.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_graph_file (str): chemin du fichier json du graph</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[pd.DataFrame]: Tableau de données</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json_graph_file</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -113,77 +205,31 @@
     <span class="k">return</span> <span class="n">results</span></div>
 </pre></div>
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Fvieille.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">Reponse Client</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">Reponse Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribuer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../AUTHORS.html">Auteurs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HISTORY.html">History</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Fvieille.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

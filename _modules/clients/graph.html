@@ -1,39 +1,74 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>clients.graph &#8212; Reponse Client 0.1.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clients.graph &mdash; Reponse Client 0.1.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Reponse Client
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Reponse Client S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clients</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Reponse Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>clients.graph</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Source code for clients.graph</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Modules de définition des entités du projet&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Modules de définition des entités du projet représenant un Graph&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -50,6 +85,18 @@
 
 <div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../clients.html#clients.graph.Node">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classe abstraite représentant un noeud du graph</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id (int): identifiant du noeud</span>
+<span class="sd">        type (int): identifiant du type de noeud (variable de class *_NODE)</span>
+
+<span class="sd">    |  PUBLICATION_NODE: 1, noeud de type publication</span>
+<span class="sd">    |  CLINICAL_TRIAL_NODE: 2, noeud de type essais clinique</span>
+<span class="sd">    |  JOURNAL_NODE: 3, noeud de type journal</span>
+<span class="sd">    |  DRUG_NODE: 4, noeud de type molécule</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
@@ -59,27 +106,52 @@
     <span class="n">DRUG_NODE</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
 
 <div class="viewcode-block" id="Node.to_dict"><a class="viewcode-back" href="../../clients.html#clients.graph.Node.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="sd">&quot;&quot;&quot;Retourne les attributs de la classe sous forme de dictionnaire</span>
 
-<div class="viewcode-block" id="Node.to_json"><a class="viewcode-back" href="../../clients.html#clients.graph.Node.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: clés: id, type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Drug"><a class="viewcode-back" href="../../clients.html#clients.graph.Drug">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Drug</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Noeud représentant une molécule hérité de Node</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): nom de la molécule</span>
+<span class="sd">        atccode (str): identifiant d&#39;origine de la molécule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Node</span><span class="o">.</span><span class="n">DRUG_NODE</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">atccode</span><span class="p">:</span> <span class="nb">str</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Drug.is_name_mentionned"><a class="viewcode-back" href="../../clients.html#clients.graph.Drug.is_name_mentionned">[docs]</a>    <span class="k">def</span> <span class="nf">is_name_mentionned</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Permet de tester si le nom de la molécule est</span>
+<span class="sd">        contenu dans une chaine de caractère</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            content (str): chaine de caractère à tester</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: retour de la valeur du test</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">content</span></div></div>
 
 
 <div class="viewcode-block" id="Publication"><a class="viewcode-back" href="../../clients.html#clients.graph.Publication">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Publication</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Noeud représentant une Publication hérité de Node</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        title (str): Titre de la publication</span>
+<span class="sd">        date (str, None): Date de parution de la publication</span>
+<span class="sd">        base_id (int, None): Identifiant d&#39;origine de la publication</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Node</span><span class="o">.</span><span class="n">PUBLICATION_NODE</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -88,6 +160,13 @@
 
 <div class="viewcode-block" id="ClinicalTrial"><a class="viewcode-back" href="../../clients.html#clients.graph.ClinicalTrial">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">ClinicalTrial</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Noeud représentant un ClinicalTrial hérité de Node</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        title (str): Titre de l&#39;essai clinique</span>
+<span class="sd">        date (str, optional): Date de parution de l&#39;essai clinique</span>
+<span class="sd">        base_id (str, optional): Identifiant d&#39;origine de l&#39;essai clinique</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Node</span><span class="o">.</span><span class="n">CLINICAL_TRIAL_NODE</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -96,12 +175,30 @@
 
 <div class="viewcode-block" id="Journal"><a class="viewcode-back" href="../../clients.html#clients.graph.Journal">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Journal</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Noeud représentant un Journal hérité de Node</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): Titre du journal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Node</span><span class="o">.</span><span class="n">JOURNAL_NODE</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
 
 
 <div class="viewcode-block" id="Link"><a class="viewcode-back" href="../../clients.html#clients.graph.Link">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Link</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classe abstraite représentant une liaison entre deux noeuds</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id (str): Identifiant unique du lien</span>
+<span class="sd">        type (int): Identifiant du type de liaison (variable de class *_LINK)</span>
+<span class="sd">        node_a (Node): Noeud A</span>
+<span class="sd">        node_b (Node): Noeud B</span>
+<span class="sd">        date (str, optional): Date du lien (pratique pour le cas d&#39;usage)</span>
+
+<span class="sd">    |  PUBLISHED_LINK: 1, liaison de type B est publié dans le journal A</span>
+<span class="sd">    |  MENTIONNED_LINK: 2, liaison de type la molécule A est mentionné dans B</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span>
@@ -115,16 +212,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">build_id</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Link.build_id"><a class="viewcode-back" href="../../clients.html#clients.graph.Link.build_id">[docs]</a>    <span class="k">def</span> <span class="nf">build_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Construction de l&#39;id de liaison en concaténant</span>
+<span class="sd">        l&#39;identifiant du noeud A et du noeud B</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Link.to_dict"><a class="viewcode-back" href="../../clients.html#clients.graph.Link.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="sd">&quot;&quot;&quot;Retourne les attributs de la classe sous forme de dictionnaire</span>
 
-<div class="viewcode-block" id="Link.to_json"><a class="viewcode-back" href="../../clients.html#clients.graph.Link.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: clés: id, type, node_a, node_b, date</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="PublishedLink"><a class="viewcode-back" href="../../clients.html#clients.graph.PublishedLink">[docs]</a><span class="k">class</span> <span class="nc">PublishedLink</span><span class="p">(</span><span class="n">Link</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Liaison représentant la publication d&#39;un essai clinique</span>
+<span class="sd">    ou d&#39;une publication dans un journal</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        node_a (Journal): Journal</span>
+<span class="sd">        node_b (Union[ClinicalTrial, Publication]): essai clinique ou publication</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: node_a must be instance of Journal</span>
+<span class="sd">        TypeError: node_b must be instance of Publication or ClinicalTrial</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">node_a</span><span class="p">:</span> <span class="n">Journal</span>
     <span class="n">node_b</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ClinicalTrial</span><span class="p">,</span> <span class="n">Publication</span><span class="p">]</span>
 
@@ -139,6 +253,23 @@
 
 
 <div class="viewcode-block" id="MentionnedLink"><a class="viewcode-back" href="../../clients.html#clients.graph.MentionnedLink">[docs]</a><span class="k">class</span> <span class="nc">MentionnedLink</span><span class="p">(</span><span class="n">Link</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Liaison représentant la mention d&#39;une molécule dans un essai clinique,</span>
+<span class="sd">    une publication ou un journal</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        node_a (Drug): Noeud représentant la molécule mentionnée</span>
+<span class="sd">        node_b (Union[ClinicalTrial, Publication, Journal]): Noeud de la mention</span>
+<span class="sd">        mention_type (str): détails de la mention (MENTION_*)</span>
+
+<span class="sd">    |  MENTION_CLINICAL_TRIAL: clinical_trial, la molécule est mentionnée dans un essai clinique</span>
+<span class="sd">    |  MENTION_PUBLICATION: publication, la molécule est mentionnée dans une publication</span>
+<span class="sd">    |  MENTION_JOURNAL: journal, la molécule est mentionnée dans un journal</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: node_a must be instance of Drug</span>
+<span class="sd">        TypeError: node_b must be instance of Publication, ClinicalTrial or Journal</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">node_a</span><span class="p">:</span> <span class="n">Drug</span>
     <span class="n">node_b</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ClinicalTrial</span><span class="p">,</span> <span class="n">Publication</span><span class="p">,</span> <span class="n">Journal</span><span class="p">]</span>
     <span class="n">mention_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -165,6 +296,16 @@
 
 <div class="viewcode-block" id="Graph"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Classe représentant un graph composé de noeuds et de liaisons</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id_state (int): valeur de l&#39;identifiant interne</span>
+<span class="sd">        nodes (list): ensembe des noeuds du graph</span>
+<span class="sd">        links (list): ensemble des liaisons du graph</span>
+<span class="sd">        _journal_lookup (dict): attribut facilitant l&#39;accès aux journaux par titre</span>
+<span class="sd">        _links_id (list): attribut listant les identifiants des liaisons</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">id_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Drug</span><span class="p">,</span> <span class="n">Journal</span><span class="p">,</span> <span class="n">Publication</span><span class="p">,</span> <span class="n">ClinicalTrial</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">links</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">MentionnedLink</span><span class="p">,</span> <span class="n">PublishedLink</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -173,20 +314,51 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">journals_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Getter de l&#39;attribut journals_lookup.</span>
+<span class="sd">        Construit le dictionnaire si None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: dictionnaire des journaux (valeur) par titre (clé)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_journals_lookup</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">journals_lookup</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">JOURNAL_NODE</span><span class="p">}</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_journals_lookup</span>
 
     <span class="nd">@journals_lookup</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">journals_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">journals_lookup</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Journal</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">journals_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">journals_lookup</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Journal</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Setter de l&#39;attribut journals_lookup.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            journals_lookup (dict): dictionnaire des journaux (valeur) par titre (clé)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: journals_lookup must be instance of dict of Journal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">journals_lookup</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;journal_lookup must be instance of dict of Journal&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;journals_lookup must be instance of dict of Journal&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_journals_lookup</span> <span class="o">=</span> <span class="n">journals_lookup</span>
 
 <div class="viewcode-block" id="Graph.look_for_drug_by_names"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.look_for_drug_by_names">[docs]</a>    <span class="k">def</span> <span class="nf">look_for_drug_by_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Drug</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Retrouve les noeuds molécule par nom de molécule</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            names (List[str]): liste des noms de molécule</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Drug]: list des objets Drug</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">drug</span> <span class="k">for</span> <span class="n">drug</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="k">if</span> <span class="n">drug</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">DRUG_NODE</span> <span class="ow">and</span> <span class="n">drug</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Graph.look_for_links_by_nodes"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.look_for_links_by_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">look_for_links_by_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">],</span> <span class="n">link_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Link</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Retrouve les liaisons incluant les noeuds en paramètres</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nodes (List[Node]): list des noeuds pour la recherche de liaison</span>
+<span class="sd">            link_type (int, optional): type de liaison à retrouver. Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Link]: list des liaisons retrouvées</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">nodes_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
         <span class="n">results_links</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Link</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">results_links</span> <span class="o">=</span> <span class="p">[</span><span class="n">link</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">links</span> <span class="k">if</span> <span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">nodes_ids</span> <span class="ow">or</span> <span class="n">link</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">nodes_ids</span><span class="p">)]</span>
@@ -195,47 +367,104 @@
         <span class="k">return</span> <span class="n">results_links</span></div>
 
 <div class="viewcode-block" id="Graph.look_for_journal"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.look_for_journal">[docs]</a>    <span class="k">def</span> <span class="nf">look_for_journal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Journal</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Retrouve un journal par son nom</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): nom du journal</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[Journal]: le noeud Journal ou None si non retrouvé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">journals_lookup</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">journals_lookup</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="Graph.look_for_journal_link"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.look_for_journal_link">[docs]</a>    <span class="k">def</span> <span class="nf">look_for_journal_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_b_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Journal</span><span class="p">]:</span>
+<div class="viewcode-block" id="Graph.look_for_journal_link"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.look_for_journal_link">[docs]</a>    <span class="k">def</span> <span class="nf">look_for_journal_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Publication</span><span class="p">,</span> <span class="n">ClinicalTrial</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Journal</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Retrouve un journal par sa liaison de publication avec le noeud B,</span>
+<span class="sd">        autrement dit, si une publication ou un essai clinique est publié dans un journal,</span>
+<span class="sd">        ce dernier est renvoyé. Recherche non optimisée.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node_b (Union[Publication, ClinicalTrial]): noeud publication ou essai clinique</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[Journal]: le journal ou None sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">journal_link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">links</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">journal_link</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Link</span><span class="o">.</span><span class="n">PUBLISHED_LINK</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">journal_link</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">node_b_id</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">journal_link</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">node_b</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">journal_link</span>
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="Graph.get_id_and_increment"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.get_id_and_increment">[docs]</a>    <span class="k">def</span> <span class="nf">get_id_and_increment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Retourne l&#39;identifiant interne et l&#39;incrémente ensuite.</span>
+<span class="sd">        L&#39;identifiant permet d&#39;associer aux noeuds ou liaisons un identifiant unique.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: valeur de l&#39;identifiant</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id_state</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_state</span> <span class="o">-</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="Graph.build_graph"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.build_graph">[docs]</a>    <span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drug_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">journal_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pubmed_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">clinical_trial_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Graph&quot;</span><span class="p">:</span>
+<div class="viewcode-block" id="Graph.build_graph"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.build_graph">[docs]</a>    <span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drug_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">journal_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pubmed_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">clinical_trial_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Graph&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Methode principale pour construire l&#39;objet graph depuis les fichiers</span>
+<span class="sd">        json formatté depuis l&#39;étape data et en particulier la fonction :func:`~clients.data.export_dfs_to_json`.</span>
+<span class="sd">        L&#39;ordre de construction est important pour prendre en compte les liaisons avec les journaux.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drug_file (str): fichier json des molécules</span>
+<span class="sd">            journal_file (str): fichier json des journaux</span>
+<span class="sd">            pubmed_file (str): fichier json des publications pubmeds</span>
+<span class="sd">            clinical_trial_file (str): fichier json des essais cliniqquqes</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Graph: objet graph complet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Construction du graph...&quot;</span><span class="p">)</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Construction des noeuds.&quot;</span><span class="p">)</span>
         <span class="c1"># build nodes</span>
         <span class="c1"># -&gt; Drug</span>
-        <span class="n">drug_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Drug</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_nodes_from_json_file_</span><span class="p">(</span><span class="n">drug_file</span><span class="p">,</span> <span class="n">Drug</span><span class="p">)</span>
+        <span class="n">drug_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Drug</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_nodes_from_json_file_</span><span class="p">(</span><span class="n">drug_file</span><span class="p">,</span> <span class="n">Drug</span><span class="p">)</span>
         <span class="c1"># -&gt; Journal</span>
-        <span class="n">journal_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Journal</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_nodes_from_json_file_</span><span class="p">(</span><span class="n">journal_file</span><span class="p">,</span> <span class="n">Journal</span><span class="p">)</span> <span class="c1"># noqa</span>
+        <span class="n">journal_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Journal</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_nodes_from_json_file_</span><span class="p">(</span><span class="n">journal_file</span><span class="p">,</span> <span class="n">Journal</span><span class="p">)</span> <span class="c1"># noqa</span>
         <span class="c1"># -&gt; Publication</span>
-        <span class="n">publication_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Publication</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_nodes_from_json_file_</span><span class="p">(</span><span class="n">pubmed_file</span><span class="p">,</span> <span class="n">Publication</span><span class="p">)</span>
+        <span class="n">publication_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Publication</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_nodes_from_json_file_</span><span class="p">(</span><span class="n">pubmed_file</span><span class="p">,</span> <span class="n">Publication</span><span class="p">)</span>
         <span class="c1"># -&gt; ClinicalTrial</span>
-        <span class="n">clinical_trial_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ClinicalTrial</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_nodes_from_json_file_</span><span class="p">(</span><span class="n">clinical_trial_file</span><span class="p">,</span> <span class="n">ClinicalTrial</span><span class="p">)</span>
+        <span class="n">clinical_trial_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ClinicalTrial</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_nodes_from_json_file_</span><span class="p">(</span><span class="n">clinical_trial_file</span><span class="p">,</span> <span class="n">ClinicalTrial</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_build_mentions</span><span class="p">(</span><span class="n">drug_nodes</span><span class="p">,</span> <span class="n">publication_nodes</span><span class="p">,</span> <span class="n">clinical_trial_nodes</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="Graph.build_nodes_from_json_file_"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.build_nodes_from_json_file_">[docs]</a>    <span class="k">def</span> <span class="nf">build_nodes_from_json_file_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">_build_nodes_from_json_file_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Methode privée pour construire les noeuds à partir d&#39;un fichier json</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): chemin du fichier json</span>
+<span class="sd">            cls (__class__): classe du type de noeud (Drug, Publication, ClinicalTrial, Journal)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Node]: list des noeuds construits</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_nodes_from_list</span><span class="p">(</span><span class="n">json_content</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_nodes_from_list</span><span class="p">(</span><span class="n">json_content</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_build_nodes_from_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Methode privée pour construire les noeuds à partir d&#39;un dictionnaire.</span>
+<span class="sd">        Les liens de publications sont également construits en même temps.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            content (List[dict]): list de dictionnaire</span>
+<span class="sd">            cls (__class__): classe du type de noeud (Drug, Publication, ClinicalTrial, Journal)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Node]: list des noeuds construits</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">current_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">infos</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
@@ -263,6 +492,13 @@
 
     <span class="k">def</span> <span class="nf">_build_mentions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drug_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Drug</span><span class="p">],</span> <span class="n">publication_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Publication</span><span class="p">],</span>
                         <span class="n">clinical_trial_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ClinicalTrial</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Methode construisant les liens de mention des molécules.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drug_nodes (List[Drug]): liste des noeuds des molécules</span>
+<span class="sd">            publication_nodes (List[Publication]): liste des noeuds des publications</span>
+<span class="sd">            clinical_trial_nodes (List[ClinicalTrial]): liste des noeuds des essais cliniques</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Construction des mentions.&quot;</span><span class="p">)</span>
         <span class="c1"># build links with publications and clinical trials</span>
         <span class="k">for</span> <span class="n">d_node</span> <span class="ow">in</span> <span class="n">drug_nodes</span><span class="p">:</span>
@@ -276,13 +512,22 @@
                 <span class="k">continue</span>
             <span class="k">if</span> <span class="n">link</span><span class="o">.</span><span class="n">mention_type</span> <span class="o">==</span> <span class="n">MentionnedLink</span><span class="o">.</span><span class="n">MENTION_CLINICAL_TRIAL</span> <span class="ow">or</span> \
                <span class="n">link</span><span class="o">.</span><span class="n">mention_type</span> <span class="o">==</span> <span class="n">MentionnedLink</span><span class="o">.</span><span class="n">MENTION_PUBLICATION</span><span class="p">:</span>
-                <span class="n">journal_link</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">look_for_journal_link</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="n">journal_link</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">look_for_journal_link</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">node_b</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">journal_link</span><span class="p">:</span>
                     <span class="k">continue</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_build_link</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">node_a</span><span class="p">,</span> <span class="n">journal_link</span><span class="o">.</span><span class="n">node_a</span><span class="p">,</span> <span class="n">journal_link</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">MentionnedLink</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">_build_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Methode générique pour construire une liaison entre deux noeuds sachant la classe</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node_a (Node): noeud A de la liaison</span>
+<span class="sd">            node_b (Node): noeud B de la liaison</span>
+<span class="sd">            date (str): date de la liaison</span>
+<span class="sd">            cls (__class__): PublishedLink, MentionnedLink</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">current_link</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Création du lien </span><span class="si">{</span><span class="n">current_link</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">current_link</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_links_id</span><span class="p">:</span>
@@ -290,8 +535,42 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_links_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_link</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">return</span>
 
-<div class="viewcode-block" id="Graph.get_drugs_mentions"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.get_drugs_mentions">[docs]</a>    <span class="k">def</span> <span class="nf">get_drugs_mentions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drug_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MentionnedLink</span><span class="p">]:</span>
-        <span class="n">drug_mentions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MentionnedLink</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="viewcode-block" id="Graph.get_drugs_mentions"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.get_drugs_mentions">[docs]</a>    <span class="k">def</span> <span class="nf">get_drugs_mentions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drug_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MentionnedLink</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Retourne les liaisons de mention d&#39;une liste de molécule.</span>
+<span class="sd">        Le format de retour correspond à un dictionnaire:</span>
+
+<span class="sd">        |  {</span>
+<span class="sd">        |      &#39;drug_name&#39;: [MentionnedLink, ..., MentionnedLink],</span>
+<span class="sd">        |      ...</span>
+<span class="sd">        |  }</span>
+
+<span class="sd">        En revanche si verbose = True, ce qui est affiché a le format suivant:</span>
+
+<span class="sd">        |  {</span>
+<span class="sd">        |     &#39;drug_name&#39;: [{</span>
+<span class="sd">        |          &#39;type&#39;: ..., # attributs type du noeud qui mentionne la molécule</span>
+<span class="sd">        |          &#39;date&#39;: ...,</span>
+<span class="sd">        |          &#39;title&#39;: ...,</span>
+<span class="sd">        |          &#39;name&#39;: ...,</span>
+<span class="sd">        |          &#39;id&#39;: ...</span>
+<span class="sd">        |      }, ..., {</span>
+<span class="sd">        |         &#39;type&#39;: ..., # attributs type du noeud qui mentionne la molécule</span>
+<span class="sd">        |          &#39;date&#39;: ...,</span>
+<span class="sd">        |          &#39;title&#39;: ...,</span>
+<span class="sd">        |          &#39;name&#39;: ...,</span>
+<span class="sd">        |          &#39;id&#39;: ...</span>
+<span class="sd">        |      }],</span>
+<span class="sd">        |      ...</span>
+<span class="sd">        |  }</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drug_names (List[str]): liste des molécules</span>
+<span class="sd">            verbose (bool, optional): Defaults to True.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, MentionnedLink]: retourne le dictionnaire de résultats</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">drug_mentions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MentionnedLink</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">pretty_drug_mentions</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="n">drug_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">look_for_drug_by_names</span><span class="p">(</span><span class="n">drug_names</span><span class="p">)</span>
@@ -309,95 +588,75 @@
         <span class="k">return</span> <span class="n">drug_mentions</span></div>
 
 <div class="viewcode-block" id="Graph.to_dict"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Convertir l&#39;objet graph en dictionnaire en utilisant dataclasses.asdict()</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[dict]: dictionnaire</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Graph.to_json"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sauvegarde l&#39;objet graph en json</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_file (str): chemin du fichier json de sortie</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Graph.from_dict"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">graph_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Graph&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Instancier l&#39;objet graph à partir d&#39;un dictionnaire</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            graph_dict (dict): dictionnaire du graph</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Graph: objet graph instancié</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">dacite</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">Graph</span><span class="p">,</span> <span class="n">graph_dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Graph.from_json"><a class="viewcode-back" href="../../clients.html#clients.graph.Graph.from_json">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="n">input_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Graph&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Instancier l&#39;objet graph à partir d&#39;un fichier json</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input_file (str): chemin du fichier json d&#39;entrée</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Graph: obket graph instancié</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">graph_dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">graph_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Graph</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">graph_dict</span><span class="p">)</span></div></div>
 </pre></div>
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Fvieille.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">Reponse Client</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">Reponse Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribuer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../AUTHORS.html">Auteurs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HISTORY.html">History</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Fvieille.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

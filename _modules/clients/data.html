@@ -1,37 +1,72 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>clients.data &#8212; Reponse Client 0.1.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clients.data &mdash; Reponse Client 0.1.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Reponse Client
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Reponse Client S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clients</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Reponse Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>clients.data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Source code for clients.data</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Module pour ingérer les données et les formater&quot;&quot;&quot;</span>
 
@@ -47,7 +82,14 @@
 
 <span class="k">def</span> <span class="nf">_clean_json</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    supprime les virgule non utile dans le json</span>
 <span class="sd">    from https://stackoverflow.com/questions/23705304/can-json-loads-ignore-trailing-commas</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        string (str): chaine de caractère du json</span>
+
+<span class="sd">    Returns:</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,[ \t\r\n]+}&quot;</span><span class="p">,</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
     <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,[ \t\r\n]+\]&quot;</span><span class="p">,</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
@@ -56,6 +98,17 @@
 
 
 <span class="k">def</span> <span class="nf">_clean_str_col</span><span class="p">(</span><span class="n">col</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Nettoyer la colonne de chaine de caractère:</span>
+<span class="sd">    * strip</span>
+<span class="sd">    * remplacer les unicodes inutiles</span>
+<span class="sd">    * np.NaN si vide</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        col (pd.Series): colonne de chaine de caractère</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Serie</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>\
         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>\
         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">x\w</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>\
@@ -63,6 +116,21 @@
 
 
 <div class="viewcode-block" id="read_and_format_drugs"><a class="viewcode-back" href="../../clients.html#clients.data.read_and_format_drugs">[docs]</a><span class="k">def</span> <span class="nf">read_and_format_drugs</span><span class="p">(</span><span class="n">drug_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Lire et formater les données molécules (drugs)</span>
+<span class="sd">    dans le but de les exporter en fichier json sous la forme:</span>
+
+<span class="sd">    |  [</span>
+<span class="sd">    |       {&quot;atccode&quot;:&quot;A04AD&quot;,&quot;name&quot;:&quot;diphenhydramine&quot;},</span>
+<span class="sd">    |       ...</span>
+<span class="sd">    |       {&quot;atccode&quot;:&quot;S03AA&quot;,&quot;name&quot;:&quot;tetracycline&quot;}</span>
+<span class="sd">    |  ]</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        drug_filename (str): chemin du fichier brut</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: tableau de données</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Drugs: lecture du fichier csv </span><span class="si">{</span><span class="n">drug_filename</span><span class="si">}</span><span class="s1"> ...&#39;</span><span class="p">)</span>
     <span class="n">drugs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">drug_filename</span><span class="p">)</span>
 
@@ -79,6 +147,24 @@
 
 
 <div class="viewcode-block" id="read_and_format_pubmed"><a class="viewcode-back" href="../../clients.html#clients.data.read_and_format_pubmed">[docs]</a><span class="k">def</span> <span class="nf">read_and_format_pubmed</span><span class="p">(</span><span class="n">pubmed_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Lire et formater les données de publications (pubmeds)</span>
+<span class="sd">    dans le but de les exporter en fichier json sous la forme:</span>
+
+<span class="sd">    | [{</span>
+<span class="sd">    |    &quot;base_id&quot;:&quot;1&quot;,</span>
+<span class="sd">    |    &quot;title&quot;:&quot;a 44-year-old man with erythema of the face diphenhydramine, neck, and chest, weakness, and palpitations&quot;,</span>
+<span class="sd">    |    &quot;date&quot;:&quot;2019-01-01T00:00:00.000Z&quot;,&quot;journal&quot;:&quot;journal of emergency nursing&quot;</span>
+<span class="sd">    | }, ...]</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pubmed_filename (Union[str, List[str]]): chemins des fichiers bruts</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: Pubmed: l&#39;extension du fichier est inconnu</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: tableau de données</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dtypes_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;journal&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}</span>
     <span class="n">str_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;journal&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pubmed_filename</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -107,6 +193,21 @@
 
 
 <div class="viewcode-block" id="read_and_format_clinical_trials"><a class="viewcode-back" href="../../clients.html#clients.data.read_and_format_clinical_trials">[docs]</a><span class="k">def</span> <span class="nf">read_and_format_clinical_trials</span><span class="p">(</span><span class="n">clinical_trial_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Lire et formater les données des essais cliniqques (clinical_trials)</span>
+<span class="sd">    dans le but de les exporter en fichier json sous la forme:</span>
+
+<span class="sd">    | [{</span>
+<span class="sd">    |    &quot;base_id&quot;:&quot;NCT01967433&quot;,</span>
+<span class="sd">    |    &quot;title&quot;:&quot;use of diphenhydramine as an adjunctive sedative for colonoscopy in patients chronically on opioids&quot;,</span>
+<span class="sd">    |    &quot;date&quot;:&quot;2020-01-01T00:00:00.000Z&quot;,</span>
+<span class="sd">    |    &quot;journal&quot;:&quot;journal of emergency nursing&quot;}, ...]</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        clinical_trial_filename (str): chemin du fichier brut</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: tableau de données</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trial: lecture du fichier csv </span><span class="si">{</span><span class="n">clinical_trial_filename</span><span class="si">}</span><span class="s1"> ...&#39;</span><span class="p">)</span>
     <span class="n">clinical_trials</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">clinical_trial_filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;scientific_title&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;journal&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">},</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
     <span class="n">clinical_trials</span> <span class="o">=</span> <span class="n">clinical_trials</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;scientific_title&#39;</span><span class="p">:</span> <span class="s1">&#39;title&#39;</span><span class="p">})</span>
@@ -129,6 +230,23 @@
 
 
 <div class="viewcode-block" id="create_journal_df"><a class="viewcode-back" href="../../clients.html#clients.data.create_journal_df">[docs]</a><span class="k">def</span> <span class="nf">create_journal_df</span><span class="p">(</span><span class="n">clinical_trials</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pubmeds</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Construction du tableau de données de référence des journaux.</span>
+<span class="sd">    Ce tableau est un référentiel des journaux présents dans les bases bruts.</span>
+<span class="sd">    Ce tableau sera exporter en fichier json sous la forme:</span>
+
+<span class="sd">    | [</span>
+<span class="sd">    |    {&quot;name&quot;:&quot;american journal of veterinary research&quot;},</span>
+<span class="sd">    |     ...,</span>
+<span class="sd">    |    {&quot;name&quot;:&quot;journal of back and musculoskeletal rehabilitation&quot;},</span>
+<span class="sd">    | ]</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        clinical_trials (pd.DataFrame): tableau de données :func:`~clients.data.read_and_format_clinical_trials`</span>
+<span class="sd">        pubmeds (pd.DataFrame):tableau de données :func:`~clients.data.read_and_format_pubmed`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: tableau de données</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Journal: création de la base journal de référence&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">clinical_trials</span><span class="p">[[</span><span class="s1">&#39;journal&#39;</span><span class="p">]],</span> <span class="n">pubmeds</span><span class="p">[[</span><span class="s1">&#39;journal&#39;</span><span class="p">]]])</span>\
         <span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>\
@@ -138,6 +256,13 @@
 
 
 <div class="viewcode-block" id="export_dfs_to_json"><a class="viewcode-back" href="../../clients.html#clients.data.export_dfs_to_json">[docs]</a><span class="k">def</span> <span class="nf">export_dfs_to_json</span><span class="p">(</span><span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dict_name_df</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Export des tableaux de données en json. Fonction générique</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        output_directory (str): chemin du répertoire de sauvegarde</span>
+<span class="sd">        dict_name_df (Dict[str, pd.DataFrame]): dictionnaire des noms de fichier (sans extension)</span>
+<span class="sd">                                                et le tableau correspondant</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Export des fichiers ...&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dict_name_df</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;export du fichier </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -145,77 +270,31 @@
     <span class="k">return</span></div>
 </pre></div>
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Fvieille.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">Reponse Client</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">Reponse Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribuer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../AUTHORS.html">Auteurs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HISTORY.html">History</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Fvieille.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
