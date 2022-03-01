@@ -7,9 +7,6 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.md') as history_file:
-    history = history_file.read()
-
 with open('requirements/prod.txt') as prod_requirements_file:
     prod_requirements = prod_requirements_file.read().splitlines()
     if prod_requirements and prod_requirements[0].startswith('-r'):
@@ -38,7 +35,7 @@ setup(
         ],
     },
     install_requires=prod_requirements,
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,
     keywords='clients',
