@@ -4,7 +4,7 @@ on:
     branches:
       - 'publish'
   release:
-    types: 
+    types:
       - 'published'
 env:
   IMAGE_NAME: prise6/reponse-client-s
