@@ -1,0 +1,451 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>clients package &#8212; Reponse Client 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contribuer" href="CONTRIBUTING.html" />
+    <link rel="prev" title="clients" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="clients-package">
+<h1>clients package<a class="headerlink" href="#clients-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-clients.cli">
+<span id="clients-cli-module"></span><h2>clients.cli module<a class="headerlink" href="#module-clients.cli" title="Permalink to this headline">¶</a></h2>
+<p>Console script for clients.</p>
+<dl class="function">
+<dt id="clients.cli.main">
+<code class="descclassname">clients.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/cli.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Console script for clients.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="clients.cli.setup_logging">
+<code class="descclassname">clients.cli.</code><code class="descname">setup_logging</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/cli.html#setup_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.cli.setup_logging" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-clients.data">
+<span id="clients-data-module"></span><h2>clients.data module<a class="headerlink" href="#module-clients.data" title="Permalink to this headline">¶</a></h2>
+<p>Module pour ingérer les données et les formater</p>
+<dl class="function">
+<dt id="clients.data.create_journal_df">
+<code class="descclassname">clients.data.</code><code class="descname">create_journal_df</code><span class="sig-paren">(</span><em>clinical_trials: pandas.core.frame.DataFrame</em>, <em>pubmeds: pandas.core.frame.DataFrame</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/clients/data.html#create_journal_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.data.create_journal_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.data.export_dfs_to_json">
+<code class="descclassname">clients.data.</code><code class="descname">export_dfs_to_json</code><span class="sig-paren">(</span><em>output_directory: str, dict_name_df: Dict[str, pandas.core.frame.DataFrame]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/clients/data.html#export_dfs_to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.data.export_dfs_to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.data.read_and_format_clinical_trials">
+<code class="descclassname">clients.data.</code><code class="descname">read_and_format_clinical_trials</code><span class="sig-paren">(</span><em>clinical_trial_filename: str</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/clients/data.html#read_and_format_clinical_trials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.data.read_and_format_clinical_trials" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.data.read_and_format_drugs">
+<code class="descclassname">clients.data.</code><code class="descname">read_and_format_drugs</code><span class="sig-paren">(</span><em>drug_filename: str</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/clients/data.html#read_and_format_drugs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.data.read_and_format_drugs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.data.read_and_format_pubmed">
+<code class="descclassname">clients.data.</code><code class="descname">read_and_format_pubmed</code><span class="sig-paren">(</span><em>pubmed_filename: Union[str, List[str]]</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/clients/data.html#read_and_format_pubmed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.data.read_and_format_pubmed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-clients.graph">
+<span id="clients-graph-module"></span><h2>clients.graph module<a class="headerlink" href="#module-clients.graph" title="Permalink to this headline">¶</a></h2>
+<p>Modules de définition des entités du projet</p>
+<dl class="class">
+<dt id="clients.graph.ClinicalTrial">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">ClinicalTrial</code><span class="sig-paren">(</span><em>id: int</em>, <em>title: str</em>, <em>date: Union[str</em>, <em>NoneType] = None</em>, <em>base_id: Union[str</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#ClinicalTrial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.ClinicalTrial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#clients.graph.Node" title="clients.graph.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">clients.graph.Node</span></code></a></p>
+<dl class="attribute">
+<dt id="clients.graph.ClinicalTrial.base_id">
+<code class="descname">base_id</code><em class="property"> = None</em><a class="headerlink" href="#clients.graph.ClinicalTrial.base_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.ClinicalTrial.date">
+<code class="descname">date</code><em class="property"> = None</em><a class="headerlink" href="#clients.graph.ClinicalTrial.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.ClinicalTrial.type">
+<code class="descname">type</code><em class="property"> = 2</em><a class="headerlink" href="#clients.graph.ClinicalTrial.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.Drug">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">Drug</code><span class="sig-paren">(</span><em>id: int</em>, <em>name: str</em>, <em>atccode: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Drug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Drug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#clients.graph.Node" title="clients.graph.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">clients.graph.Node</span></code></a></p>
+<dl class="method">
+<dt id="clients.graph.Drug.is_name_mentionned">
+<code class="descname">is_name_mentionned</code><span class="sig-paren">(</span><em>content: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/clients/graph.html#Drug.is_name_mentionned"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Drug.is_name_mentionned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Drug.type">
+<code class="descname">type</code><em class="property"> = 4</em><a class="headerlink" href="#clients.graph.Drug.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.Graph">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">Graph</code><a class="reference internal" href="_modules/clients/graph.html#Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="clients.graph.Graph.build_graph">
+<code class="descname">build_graph</code><span class="sig-paren">(</span><em>drug_file: str</em>, <em>journal_file: str</em>, <em>pubmed_file: str</em>, <em>clinical_trial_file: str</em><span class="sig-paren">)</span> &#x2192; clients.graph.Graph<a class="reference internal" href="_modules/clients/graph.html#Graph.build_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.build_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.build_nodes_from_json_file_">
+<code class="descname">build_nodes_from_json_file_</code><span class="sig-paren">(</span><em>filename: str</em>, <em>cls</em><span class="sig-paren">)</span> &#x2192; List[clients.graph.Node]<a class="reference internal" href="_modules/clients/graph.html#Graph.build_nodes_from_json_file_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.build_nodes_from_json_file_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="clients.graph.Graph.from_dict">
+<em class="property">static </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>graph_dict: dict</em><span class="sig-paren">)</span> &#x2192; clients.graph.Graph<a class="reference internal" href="_modules/clients/graph.html#Graph.from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="clients.graph.Graph.from_json">
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>input_file: str</em><span class="sig-paren">)</span> &#x2192; clients.graph.Graph<a class="reference internal" href="_modules/clients/graph.html#Graph.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.from_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.get_drugs_mentions">
+<code class="descname">get_drugs_mentions</code><span class="sig-paren">(</span><em>drug_names: List[str], verbose: bool = True</em><span class="sig-paren">)</span> &#x2192; Dict[str, clients.graph.MentionnedLink]<a class="reference internal" href="_modules/clients/graph.html#Graph.get_drugs_mentions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.get_drugs_mentions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.get_id_and_increment">
+<code class="descname">get_id_and_increment</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/clients/graph.html#Graph.get_id_and_increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.get_id_and_increment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Graph.id_state">
+<code class="descname">id_state</code><em class="property"> = 0</em><a class="headerlink" href="#clients.graph.Graph.id_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Graph.journals_lookup">
+<code class="descname">journals_lookup</code><a class="headerlink" href="#clients.graph.Graph.journals_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.look_for_drug_by_names">
+<code class="descname">look_for_drug_by_names</code><span class="sig-paren">(</span><em>names: List[str]</em><span class="sig-paren">)</span> &#x2192; List[clients.graph.Drug]<a class="reference internal" href="_modules/clients/graph.html#Graph.look_for_drug_by_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.look_for_drug_by_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.look_for_journal">
+<code class="descname">look_for_journal</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; Optional[clients.graph.Journal]<a class="reference internal" href="_modules/clients/graph.html#Graph.look_for_journal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.look_for_journal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.look_for_journal_link">
+<code class="descname">look_for_journal_link</code><span class="sig-paren">(</span><em>node_b_id: int</em><span class="sig-paren">)</span> &#x2192; Optional[clients.graph.Journal]<a class="reference internal" href="_modules/clients/graph.html#Graph.look_for_journal_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.look_for_journal_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.look_for_links_by_nodes">
+<code class="descname">look_for_links_by_nodes</code><span class="sig-paren">(</span><em>nodes: List[clients.graph.Node], link_type: int = None</em><span class="sig-paren">)</span> &#x2192; List[clients.graph.Link]<a class="reference internal" href="_modules/clients/graph.html#Graph.look_for_links_by_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.look_for_links_by_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[dict]<a class="reference internal" href="_modules/clients/graph.html#Graph.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Graph.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><em>output_file: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/clients/graph.html#Graph.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Graph.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.Journal">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">Journal</code><span class="sig-paren">(</span><em>id: int</em>, <em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Journal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Journal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#clients.graph.Node" title="clients.graph.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">clients.graph.Node</span></code></a></p>
+<dl class="attribute">
+<dt id="clients.graph.Journal.type">
+<code class="descname">type</code><em class="property"> = 3</em><a class="headerlink" href="#clients.graph.Journal.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.Link">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">Link</code><span class="sig-paren">(</span><em>node_a: clients.graph.Node</em>, <em>node_b: clients.graph.Node</em>, <em>date: Union[str</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="attribute">
+<dt id="clients.graph.Link.MENTIONNED_LINK">
+<code class="descname">MENTIONNED_LINK</code><em class="property"> = 2</em><a class="headerlink" href="#clients.graph.Link.MENTIONNED_LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Link.PUBLISHED_LINK">
+<code class="descname">PUBLISHED_LINK</code><em class="property"> = 1</em><a class="headerlink" href="#clients.graph.Link.PUBLISHED_LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Link.build_id">
+<code class="descname">build_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/clients/graph.html#Link.build_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Link.build_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Link.date">
+<code class="descname">date</code><em class="property"> = None</em><a class="headerlink" href="#clients.graph.Link.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Link.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Link.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Link.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Link.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Link.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Link.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.MentionnedLink">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">MentionnedLink</code><span class="sig-paren">(</span><em>node_a: clients.graph.Node</em>, <em>node_b: clients.graph.Node</em>, <em>date: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#MentionnedLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.MentionnedLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#clients.graph.Link" title="clients.graph.Link"><code class="xref py py-class docutils literal notranslate"><span class="pre">clients.graph.Link</span></code></a></p>
+<dl class="attribute">
+<dt id="clients.graph.MentionnedLink.MENTION_CLINICAL_TRIAL">
+<code class="descname">MENTION_CLINICAL_TRIAL</code><em class="property"> = 'clinical_trial'</em><a class="headerlink" href="#clients.graph.MentionnedLink.MENTION_CLINICAL_TRIAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.MentionnedLink.MENTION_JOURNAL">
+<code class="descname">MENTION_JOURNAL</code><em class="property"> = 'journal'</em><a class="headerlink" href="#clients.graph.MentionnedLink.MENTION_JOURNAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.MentionnedLink.MENTION_PUBLICATION">
+<code class="descname">MENTION_PUBLICATION</code><em class="property"> = 'publication'</em><a class="headerlink" href="#clients.graph.MentionnedLink.MENTION_PUBLICATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.MentionnedLink.mention_type">
+<code class="descname">mention_type</code><em class="property"> = Field(name=None,type=None,default=&lt;dataclasses._MISSING_TYPE object&gt;,default_factory=&lt;dataclasses._MISSING_TYPE object&gt;,init=False,repr=True,hash=None,compare=True,metadata=mappingproxy({}),_field_type=None)</em><a class="headerlink" href="#clients.graph.MentionnedLink.mention_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.Node">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>id: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="attribute">
+<dt id="clients.graph.Node.CLINICAL_TRIAL_NODE">
+<code class="descname">CLINICAL_TRIAL_NODE</code><em class="property"> = 2</em><a class="headerlink" href="#clients.graph.Node.CLINICAL_TRIAL_NODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Node.DRUG_NODE">
+<code class="descname">DRUG_NODE</code><em class="property"> = 4</em><a class="headerlink" href="#clients.graph.Node.DRUG_NODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Node.JOURNAL_NODE">
+<code class="descname">JOURNAL_NODE</code><em class="property"> = 3</em><a class="headerlink" href="#clients.graph.Node.JOURNAL_NODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Node.PUBLICATION_NODE">
+<code class="descname">PUBLICATION_NODE</code><em class="property"> = 1</em><a class="headerlink" href="#clients.graph.Node.PUBLICATION_NODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Node.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/clients/graph.html#Node.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Node.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="clients.graph.Node.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Node.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Node.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.Publication">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">Publication</code><span class="sig-paren">(</span><em>id: int</em>, <em>title: str</em>, <em>date: Union[str</em>, <em>NoneType] = None</em>, <em>base_id: Union[int</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#Publication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.Publication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#clients.graph.Node" title="clients.graph.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">clients.graph.Node</span></code></a></p>
+<dl class="attribute">
+<dt id="clients.graph.Publication.base_id">
+<code class="descname">base_id</code><em class="property"> = None</em><a class="headerlink" href="#clients.graph.Publication.base_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Publication.date">
+<code class="descname">date</code><em class="property"> = None</em><a class="headerlink" href="#clients.graph.Publication.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="clients.graph.Publication.type">
+<code class="descname">type</code><em class="property"> = 1</em><a class="headerlink" href="#clients.graph.Publication.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clients.graph.PublishedLink">
+<em class="property">class </em><code class="descclassname">clients.graph.</code><code class="descname">PublishedLink</code><span class="sig-paren">(</span><em>node_a: clients.graph.Node</em>, <em>node_b: clients.graph.Node</em>, <em>date: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clients/graph.html#PublishedLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.graph.PublishedLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#clients.graph.Link" title="clients.graph.Link"><code class="xref py py-class docutils literal notranslate"><span class="pre">clients.graph.Link</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-clients.tasks">
+<span id="clients-tasks-module"></span><h2>clients.tasks module<a class="headerlink" href="#module-clients.tasks" title="Permalink to this headline">¶</a></h2>
+<p>Module des jobs pour le cli</p>
+<dl class="function">
+<dt id="clients.tasks.export_graph">
+<code class="descclassname">clients.tasks.</code><code class="descname">export_graph</code><span class="sig-paren">(</span><em>input_directory: str</em>, <em>json_graph_file: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/clients/tasks.html#export_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.tasks.export_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.tasks.export_journals_with_distinct_mention">
+<code class="descclassname">clients.tasks.</code><code class="descname">export_journals_with_distinct_mention</code><span class="sig-paren">(</span><em>json_graph_file: str</em><span class="sig-paren">)</span> &#x2192; Optional[pandas.core.frame.DataFrame]<a class="reference internal" href="_modules/clients/tasks.html#export_journals_with_distinct_mention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.tasks.export_journals_with_distinct_mention" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.tasks.print_drug_mention">
+<code class="descclassname">clients.tasks.</code><code class="descname">print_drug_mention</code><span class="sig-paren">(</span><em>json_graph_file: str, drug_names: List[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/clients/tasks.html#print_drug_mention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.tasks.print_drug_mention" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="clients.tasks.read_and_format_data">
+<code class="descclassname">clients.tasks.</code><code class="descname">read_and_format_data</code><span class="sig-paren">(</span><em>pubmed_files: List[str], clinical_trials_file: str, drug_file: str, output_directory: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/clients/tasks.html#read_and_format_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clients.tasks.read_and_format_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-clients">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clients" title="Permalink to this headline">¶</a></h2>
+<p>Top-level package for Reponse Client.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Reponse Client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Reponse Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">clients</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">clients package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUTHORS.html">Auteurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HISTORY.html">History</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">clients</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">clients</a></li>
+      <li>Next: <a href="CONTRIBUTING.html" title="next chapter">Contribuer</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Fvieille.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/clients.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
