@@ -1,12 +1,12 @@
-name: publish
+name: publish-docker
 
 on:
-  release:
-    types: 
-      - 'published'
   push:
     branches:
       - 'publish'
+  release:
+    types: 
+      - 'published'
 
 env:
   IMAGE_NAME: prise6/reponse-client-s
