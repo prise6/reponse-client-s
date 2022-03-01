@@ -20,8 +20,8 @@ def read_and_format_data(pubmed_files: List[str], clinical_trials_file: str, dru
         journals = create_journal_df(clinical_trials, pubmeds)
         drugs = read_and_format_drugs(drug_file)
     except Exception:
-        logger.exception("Une erreur est survenue pendant le formattage des données.")
-        return
+        logger.error("Une erreur est survenue pendant le formattage des données.")
+        raise
     try:
         export_dfs_to_json(output_directory, {
             'pubmeds': pubmeds,
@@ -30,7 +30,8 @@ def read_and_format_data(pubmed_files: List[str], clinical_trials_file: str, dru
             'drugs': drugs
         })
     except Exception:
-        logger.exception("Une erreur est survenue pendant la sauvegarde des données.")
+        logger.error("Une erreur est survenue pendant la sauvegarde des données.")
+        raise
 
 
 def export_graph(input_directory: str, json_graph_file: str) -> None:
@@ -43,22 +44,23 @@ def export_graph(input_directory: str, json_graph_file: str) -> None:
             clinical_trial_file=os.path.join(input_directory, 'clinical_trials.json')
         )
     except Exception:
-        logger.exception("Une erreur est survenue pendant la création des données.\
+        logger.error("Une erreur est survenue pendant la création des données.\
                           Activer le mode debug pour plus d'informations.")
-        return
+        raise
 
     try:
         g.to_json(json_graph_file)
     except Exception:
-        logger.exception("Une erreur est survenue pendant la sauvegarde du graph.")
+        logger.error("Une erreur est survenue pendant la sauvegarde du graph.")
+        raise
 
 
 def print_drug_mention(json_graph_file: str, drug_names: List[str]) -> None:
     try:
         g = Graph().from_json(json_graph_file)
     except Exception:
-        logger.exception("Une erreur est survenue pendant la lecture du graph")
-        return
+        logger.error("Une erreur est survenue pendant la lecture du graph")
+        raise
     g.get_drugs_mentions(drug_names, verbose=True)
 
 
@@ -67,7 +69,7 @@ def export_journals_with_distinct_mention(json_graph_file: str) -> Optional[pd.D
         g = Graph().from_json(json_graph_file)
     except Exception:
         logger.exception("Une erreur est survenue pendant la lecture du graph")
-        return
+        raise
     journal_mention_links = [dataclasses.asdict(link) for link in g.links
                              if isinstance(link, MentionnedLink) and link.mention_type == MentionnedLink.MENTION_JOURNAL]
     journal_links_df = pd.DataFrame.from_dict(pd.json_normalize(journal_mention_links, sep="_"))

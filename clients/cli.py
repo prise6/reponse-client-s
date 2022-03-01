@@ -2,11 +2,15 @@
 import argparse
 import sys
 import logging.config
+import logging
 
 from clients.tasks import (export_graph,
                            export_journals_with_distinct_mention,
                            print_drug_mention,
                            read_and_format_data)
+
+
+logger = logging.getLogger(__name__)
 
 
 def setup_logging():
@@ -67,15 +71,23 @@ def main():
     parser_query.set_defaults(func=export_journals_with_distinct_mention)
 
     args, _ = parser.parse_known_args()
+    res = None
     if args.task:
         dict_args = vars(args).copy()
         dict_args.pop('func')
         dict_args.pop('task')
-        res = args.func(**dict_args)
+        try:
+            res = args.func(**dict_args)
+        except KeyboardInterrupt:
+            logger.info("Le script a été interrompu.")
+            return 1
+        except Exception:
+            logger.exception("Une erreur est survenue.")
+            return 1
     else:
         parser.print_help()
 
-    if args.task == 'query':
+    if res:
         print(res)
 
     return 0
