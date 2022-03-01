@@ -1,5 +1,4 @@
 name: publish-docker
-
 on:
   push:
     branches:
@@ -7,10 +6,8 @@ on:
   release:
     types: 
       - 'published'
-
 env:
   IMAGE_NAME: prise6/reponse-client-s
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,7 +29,6 @@ jobs:
         with:
           name: clients_wheel
           path: dist/*.whl
-
   docker-deploy:
     runs-on: ubuntu-latest
     steps:
