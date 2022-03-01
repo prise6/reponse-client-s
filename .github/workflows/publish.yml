@@ -5,7 +5,7 @@ on:
     types: [published]
   push:
     branches:
-      - publish
+      - 'publish'
 
 env:
   IMAGE_NAME: prise6/reponse-client-s
