@@ -14,6 +14,25 @@ logger = logging.getLogger(__name__)
 
 def read_and_format_data(pubmed_files: List[str], clinical_trials_file: str, drug_file: str,
                          output_directory: str) -> None:
+    """Job data de lecture et format des données à partir des fichiers bruts.
+    Sauvegarde les données sous format json dans `output_directory`:
+
+    * pubmeds.json
+    * clinical_trials.json
+    * drugs.json
+    * journals.json
+
+    Cette étape peut être découpée si besoin. L'hypothèse est que les données bruts doivent
+    être nettoyées et consolider afin d'être exploitées par la suite.
+    Dans la réalité, les données bruts sont souvent déversés dans un datalake puis structurer
+    (nettoyage, création d'identifiant, base relationnel, ...) dans un stockage adapté et requêtable.
+
+    Args:
+        pubmed_files (List[str]): chemins des données bruts
+        clinical_trials_file (str): chemin des données bruts
+        drug_file (str): chemin des données bruts
+        output_directory (str): répertoire de sauvegarde des données json
+    """
     try:
         pubmeds = read_and_format_pubmed(pubmed_files)
         clinical_trials = read_and_format_clinical_trials(clinical_trials_file)
@@ -35,6 +54,25 @@ def read_and_format_data(pubmed_files: List[str], clinical_trials_file: str, dru
 
 
 def export_graph(input_directory: str, json_graph_file: str) -> None:
+    """Job de création et export du graph des liaisons entre les différentes entités
+    (molécules, publications, essais cliniques, journaux).
+
+    Cette étape correspond à la manipulation métier des données structurées dans un but précis.
+    Ici, il est nécessaire de retravailler les données pour les stocker sous un format de graph.
+    Idéalement, on devrait s'appuyer sur une base de données orientée graph (Neo4j par ex.) et donc
+    modéliser les noeuds et les liaisons dans cette base.
+
+    Ici, j'ai voulu apprendre à utiliser les dataclasses de python, j'en ai profiter avec ce projet
+    pour créer une classe Graph et des classes Nodes simples.
+    La complexité des recherches de liaisons est forcément impactée si les données sont volumineuses.
+
+    L'object Graph grâce à dataclasses peut être exporté et importé facilement sous forme de dictionnaire
+    (et donc json)
+
+    Args:
+        input_directory (str): répertoire de sauvegarde des données json du job :func:`~read_and_format_data`
+        json_graph_file (str): chemin du fichier json du graph
+    """
     try:
         g = Graph()
         g.build_graph(
@@ -56,6 +94,15 @@ def export_graph(input_directory: str, json_graph_file: str) -> None:
 
 
 def print_drug_mention(json_graph_file: str, drug_names: List[str]) -> None:
+    """Afficher les liaisons d'une molécule. Voir :func:`~clients.graph.Graph.get_drugs_mentions`.
+
+    Cette étape correspond à l'exploitation d'une base graph. C'est à dire l'usage de python pour
+    requêter en un language adapté la base de données graph (ex cypher pour Neo4j, comme SQL pour le relationnel)
+
+    Args:
+        json_graph_file (str): chemin du fichier json du graph
+        drug_names (List[str]): liste des molécules
+    """
     try:
         g = Graph().from_json(json_graph_file)
     except Exception:
@@ -65,6 +112,16 @@ def print_drug_mention(json_graph_file: str, drug_names: List[str]) -> None:
 
 
 def export_journals_with_distinct_mention(json_graph_file: str) -> Optional[pd.DataFrame]:
+    """Retourne une tableau de données des journaux avec le nombre distinct de molécules mentionnées.
+
+    Correspond à une étape d'exploitation d'une base prête à l'emploi également.
+
+    Args:
+        json_graph_file (str): chemin du fichier json du graph
+
+    Returns:
+        Optional[pd.DataFrame]: Tableau de données
+    """
     try:
         g = Graph().from_json(json_graph_file)
     except Exception:

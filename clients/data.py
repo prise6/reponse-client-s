@@ -12,7 +12,14 @@ logger = logging.getLogger(__name__)
 
 def _clean_json(string):
     """
+    supprime les virgule non utile dans le json
     from https://stackoverflow.com/questions/23705304/can-json-loads-ignore-trailing-commas
+
+    Args:
+        string (str): chaine de caractère du json
+
+    Returns:
+
     """
     string = re.sub(r",[ \t\r\n]+}", "}", string)
     string = re.sub(r",[ \t\r\n]+\]", "]", string)
@@ -21,6 +28,17 @@ def _clean_json(string):
 
 
 def _clean_str_col(col: pd.Series):
+    """Nettoyer la colonne de chaine de caractère:
+    * strip
+    * remplacer les unicodes inutiles
+    * np.NaN si vide
+
+    Args:
+        col (pd.Series): colonne de chaine de caractère
+
+    Returns:
+        pd.Serie
+    """
     return col.str.lower()\
         .str.strip()\
         .str.replace(r'\\x\w{2}', '', regex=True)\
@@ -28,6 +46,21 @@ def _clean_str_col(col: pd.Series):
 
 
 def read_and_format_drugs(drug_filename: str) -> pd.DataFrame:
+    """Lire et formater les données molécules (drugs)
+    dans le but de les exporter en fichier json sous la forme:
+
+    |  [
+    |       {"atccode":"A04AD","name":"diphenhydramine"},
+    |       ...
+    |       {"atccode":"S03AA","name":"tetracycline"}
+    |  ]
+
+    Args:
+        drug_filename (str): chemin du fichier brut
+
+    Returns:
+        pd.DataFrame: tableau de données
+    """
     logger.info(f'Drugs: lecture du fichier csv {drug_filename} ...')
     drugs = pd.read_csv(drug_filename)
 
@@ -44,6 +77,24 @@ def read_and_format_drugs(drug_filename: str) -> pd.DataFrame:
 
 
 def read_and_format_pubmed(pubmed_filename: Union[str, List[str]]) -> pd.DataFrame:
+    """Lire et formater les données de publications (pubmeds)
+    dans le but de les exporter en fichier json sous la forme:
+
+    | [{
+    |    "base_id":"1",
+    |    "title":"a 44-year-old man with erythema of the face diphenhydramine, neck, and chest, weakness, and palpitations",
+    |    "date":"2019-01-01T00:00:00.000Z","journal":"journal of emergency nursing"
+    | }, ...]
+
+    Args:
+        pubmed_filename (Union[str, List[str]]): chemins des fichiers bruts
+
+    Raises:
+        ValueError: Pubmed: l'extension du fichier est inconnu
+
+    Returns:
+        pd.DataFrame: tableau de données
+    """
     dtypes_args = {'id': str, 'title': str, 'journal': str}
     str_cols = ['id', 'title', 'journal']
     if isinstance(pubmed_filename, list):
@@ -72,6 +123,21 @@ def read_and_format_pubmed(pubmed_filename: Union[str, List[str]]) -> pd.DataFra
 
 
 def read_and_format_clinical_trials(clinical_trial_filename: str) -> pd.DataFrame:
+    """Lire et formater les données des essais cliniqques (clinical_trials)
+    dans le but de les exporter en fichier json sous la forme:
+
+    | [{
+    |    "base_id":"NCT01967433",
+    |    "title":"use of diphenhydramine as an adjunctive sedative for colonoscopy in patients chronically on opioids",
+    |    "date":"2020-01-01T00:00:00.000Z",
+    |    "journal":"journal of emergency nursing"}, ...]
+
+    Args:
+        clinical_trial_filename (str): chemin du fichier brut
+
+    Returns:
+        pd.DataFrame: tableau de données
+    """
     logger.info(f'Trial: lecture du fichier csv {clinical_trial_filename} ...')
     clinical_trials = pd.read_csv(clinical_trial_filename, dtype={'id': str, 'scientific_title': str, 'journal': str}, parse_dates=['date'])
     clinical_trials = clinical_trials.rename(columns={'scientific_title': 'title'})
@@ -94,6 +160,23 @@ def read_and_format_clinical_trials(clinical_trial_filename: str) -> pd.DataFram
 
 
 def create_journal_df(clinical_trials: pd.DataFrame, pubmeds: pd.DataFrame) -> pd.DataFrame:
+    """Construction du tableau de données de référence des journaux.
+    Ce tableau est un référentiel des journaux présents dans les bases bruts.
+    Ce tableau sera exporter en fichier json sous la forme:
+
+    | [
+    |    {"name":"american journal of veterinary research"},
+    |     ...,
+    |    {"name":"journal of back and musculoskeletal rehabilitation"},
+    | ]
+
+    Args:
+        clinical_trials (pd.DataFrame): tableau de données :func:`~clients.data.read_and_format_clinical_trials`
+        pubmeds (pd.DataFrame):tableau de données :func:`~clients.data.read_and_format_pubmed`
+
+    Returns:
+        pd.DataFrame: tableau de données
+    """
     logger.info("Journal: création de la base journal de référence")
     return pd.concat([clinical_trials[['journal']], pubmeds[['journal']]])\
         .drop_duplicates()\
@@ -103,6 +186,13 @@ def create_journal_df(clinical_trials: pd.DataFrame, pubmeds: pd.DataFrame) -> p
 
 
 def export_dfs_to_json(output_directory: str, dict_name_df: Dict[str, pd.DataFrame]) -> None:
+    """Export des tableaux de données en json. Fonction générique
+
+    Args:
+        output_directory (str): chemin du répertoire de sauvegarde
+        dict_name_df (Dict[str, pd.DataFrame]): dictionnaire des noms de fichier (sans extension)
+                                                et le tableau correspondant
+    """
     logger.info("Export des fichiers ...")
     for name, df in dict_name_df.items():
         logger.info(f"export du fichier {name}")

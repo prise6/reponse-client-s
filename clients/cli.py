@@ -13,7 +13,7 @@ from clients.tasks import (export_graph,
 logger = logging.getLogger(__name__)
 
 
-def setup_logging():
+def _setup_logging():
     dict_config = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -43,8 +43,20 @@ def setup_logging():
 
 
 def main():
-    """Console script for clients."""
-    setup_logging()
+    """Console script for clients.
+
+    Ce CLI renvoit comme exit code 0 si l'action est effectué, 1 sinon.
+
+    |  usage: clients [-h] {data,build_graph,mentions,query} ...
+    |
+    |  positional arguments:
+    |      {data,build_graph,mentions,query}
+    |
+    |  optional arguments:
+    |      -h, --help            show this help message and exit
+
+    """
+    _setup_logging()
     parser = argparse.ArgumentParser()
 
     subparser = parser.add_subparsers(dest="task")
