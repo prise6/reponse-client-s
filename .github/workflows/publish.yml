@@ -31,6 +31,7 @@ jobs:
           path: dist/*.whl
   docker-deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Create dist directory
