@@ -16,7 +16,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="next" title="clients" href="modules.html" />
     <link rel="prev" title="Bienvenue sur la documentation de la réponse du client S" href="index.html" /> 
 </head>
 
@@ -38,18 +38,23 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reponse Client S</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#jobs">Jobs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pratique-python">Pratique python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jobs">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoyer-et-formater-les-donnees">Nettoyer et formater les données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structurer-les-donnees-pour-un-objectif">Structurer les données pour un objectif</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exploiter-les-donnees">Exploiter les données</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pratiques-python">Pratiques python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-repertoires">Les répertoires</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-importants">Les fichiers importants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tester">Tester</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-actions">Github Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">clients</a></li>
 </ul>
 
@@ -81,30 +86,231 @@
 <h1>Reponse Client S<a class="headerlink" href="#reponse-client-s" title="Permalink to this headline"></a></h1>
 <blockquote>
 <div>Projet Reponse Client S de Fvieille</div></blockquote>
+<p>La documentation est disponible <a class="reference external" href="https://prise6.github.io/reponse-client-s/">prise6.github.io/reponse-client-s/</a>.</p>
+<p>La problématique consiste à construire un graph représentant une molécule (Drug) et ses mentions dans plusieurs entités: publication (article scientifique issus de PubMed), essais cliniques et Journaux.</p>
+<ul class="simple">
+<li>Une molécule est considérée comme mentionné dans un article PubMed ou un essai clinique s’il est
+mentionné dans le titre de la publication.</li>
+<li>Une molécule est considérée comme mentionné par un journal s’il est mentionné dans une publication
+émise par ce journal.</li>
+</ul>
+<p>A disposition, nous avons des données bruts: pubmeds.csv, pubmeds.json, clinical_trials.csv, drugs.csv.</p>
+<p>La forme de la réponse est un projet python sous forme de package. Le package python est nommé <code class="docutils literal notranslate"><span class="pre">clients</span></code>.
+Ce package python embarque un CLI pour appeler différentes tâches dans le but de l’intégrer dans un orchestrateur (DAG).</p>
+<p>Le projet est également conteneuriser dans une image docker dont l’entrypoint est le CLI du package. Cela permet un usage simple.</p>
+<p>Ci-dessous je décris mon découpage en trois jobs fonctionnels afin de répondre à la problématique. A noter que j’ai pris des décisions hors du contexte et des besoins réels. J’en ai également profiter pour tester de nouvelles choses. Et enfin, chaque étape a été pensé dans un but de demonstration.</p>
+<p>Je réponds à la question “Pour aller plus loin” à chaque Job. Globalement, avec une grosse volumétrie de données, je préconise la mise en place de base de données adapté (elastic + Neo4j ?) et l’usage de python (ou spark) pour faire le lien entre ces bases: requêtes ou traitement si impossible via requête. L’orchestrateur peut également poper plusieurs jobs en parallèle ?</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>Dans un environnement virtuel python:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gh repo clone prise6/reponse-client-s
+<span class="nb">cd</span> reponse-client-s
+pip install .
+clients --help
+<span class="c1"># usage: clients [-h] {data,build_graph,mentions,query} ...</span>
+<span class="c1">#</span>
+<span class="c1"># positional arguments:</span>
+<span class="c1">#   {data,build_graph,mentions,query}</span>
+<span class="c1">#</span>
+<span class="c1"># optional arguments:</span>
+<span class="c1">#   -h, --help            show this help message and exit</span>
+</pre></div>
+</div>
+<p>Dans l’idéal, l’artifact wheel du package peut être télécharger depuis un dépôt pour installer le package à partir du wheel.</p>
+<p>Dans un environnement docker:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker pull prise6/reponse-client-s:latest
+docker run --rm prise6/reponse-client-s
+<span class="c1"># ou en montant les données d&#39;entrée pour les tâches, ex:</span>
+docker run --rm -v  /path/to/data/directory:/data prise6/reponse-client-s mentions -g /data/graph.json -d ethanol
+</pre></div>
+</div>
+</div>
 <div class="section" id="jobs">
 <h2>Jobs<a class="headerlink" href="#jobs" title="Permalink to this headline"></a></h2>
+<p>Selon moi, ce projet peut être assimiler à trois étapes classiques dans un projet data :</p>
 <ol class="simple">
-<li>Nettoyer et formater les données
-raw layer -&gt; data layer</li>
-<li>Structurer les données proche d’un objectif métier
-data layer -&gt; graph</li>
-<li>Exploiter les données pour une problématique
-graph -&gt; requête</li>
+<li>Ingestion et formater les données</li>
+<li>Structurer les données pour un objectif</li>
+<li>Exploiter les données</li>
 </ol>
-</div>
-<div class="section" id="pratique-python">
-<h2>Pratique python<a class="headerlink" href="#pratique-python" title="Permalink to this headline"></a></h2>
-<p>Voici la liste des pratiques de dev python abordés dans ce projet. Chaque point n’est pas forcément extrêmement développé, c’est dans un but de demonstration.</p>
+<p>Chaque étape correspond à une commande avec le CLI <code class="docutils literal notranslate"><span class="pre">clients</span></code> du package. La commande renvoit un exit code utilisable par un DAG pour statuer sur l’état de la tâche.</p>
+<div class="section" id="nettoyer-et-formater-les-donnees">
+<h3>Nettoyer et formater les données<a class="headerlink" href="#nettoyer-et-formater-les-donnees" title="Permalink to this headline"></a></h3>
+<p>Avec l’hypothèse que les fichiers plats sont des données bruts déversés dans un datalake par exemple, il faut les rendre exploitable:</p>
 <ul class="simple">
-<li>structure de package</li>
-<li>découpage en méthode / classes</li>
+<li>nettoyage: supprimer les doublons par ex.</li>
+<li>formater: traiter les chaines de caractères par ex.</li>
+</ul>
+<p>Dans notre cas, selon moi, il faut également créer un référentiel des journaux.</p>
+<p>En sortie de cette étape, nous créons quatre fichier json (cf documentation ̀<code class="docutils literal notranslate"><span class="pre">clients.tasks.read_and_format_data()</span></code> et <code class="docutils literal notranslate"><span class="pre">clients.data</span></code>)</p>
+<p>Usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># cli, les données sont dans le repertoire courant</span>
+clients data<span class="se">\</span>
+    --pubmed-filespubmed.json pubmed.csv<span class="se">\</span>
+    --clinical-trials-file clinical_trials.csv<span class="se">\</span>
+    --drug-file drugs.csv<span class="se">\</span>
+    -o outputs
+<span class="c1"># 2022-03-02 10:13:48,878 - clients.data - INFO - Pubmed: lecture du fichier pubmed assets/Python_test_DE/pubmed.json ...</span>
+<span class="c1"># 2022-03-02 10:13:48,913 - clients.data - INFO - Pubmed: lecture du fichier pubmed assets/Python_test_DE/pubmed.csv ...</span>
+<span class="c1"># 2022-03-02 10:13:48,939 - clients.data - INFO - Trial: lecture du fichier csv assets/Python_test_DE/clinical_trials.csv ...</span>
+<span class="c1"># 2022-03-02 10:13:48,945 - clients.data - INFO - Trial: format des colonnes ...</span>
+<span class="c1"># 2022-03-02 10:13:48,962 - clients.data - INFO - Trial: suppression des clinical_trials avec titre vide ...</span>
+<span class="c1"># 2022-03-02 10:13:48,966 - clients.data - INFO - Trial: des doublons sont présents dans la base...</span>
+<span class="c1"># 2022-03-02 10:13:48,966 - clients.data - INFO - Trial: les doublons ont été supprimés.</span>
+<span class="c1"># 2022-03-02 10:13:48,968 - clients.data - INFO - Journal: création de la base journal de référence</span>
+<span class="c1"># 2022-03-02 10:13:48,977 - clients.data - INFO - Drugs: lecture du fichier csv assets/Python_test_DE/drugs.csv ...</span>
+<span class="c1"># 2022-03-02 10:13:48,979 - clients.data - INFO - Drugs: format des colonnes ...</span>
+<span class="c1"># 2022-03-02 10:13:48,986 - clients.data - INFO - Export des fichiers ...</span>
+<span class="c1"># 2022-03-02 10:13:48,986 - clients.data - INFO - export du fichier pubmeds</span>
+<span class="c1"># 2022-03-02 10:13:48,988 - clients.data - INFO - export du fichier clinical_trials</span>
+<span class="c1"># 2022-03-02 10:13:48,989 - clients.data - INFO - export du fichier journals</span>
+<span class="c1"># 2022-03-02 10:13:48,990 - clients.data - INFO - export du fichier drugs</span>
+</pre></div>
+</div>
+<p>Pour aller plus loin, il faudrait créer une base relationnelle ou orientée document (elasticsearch car traitement de données textuelles) entre les différentes entités: en ajoutant un identifiant aux journaux et les référencant dans chaque publication. Si les données sont volumineuses, on peut envisager spark pour les traitement data.</p>
+<p>A l’issue de cette étape, nous avons des données propres stockées.</p>
+</div>
+<div class="section" id="structurer-les-donnees-pour-un-objectif">
+<h3>Structurer les données pour un objectif<a class="headerlink" href="#structurer-les-donnees-pour-un-objectif" title="Permalink to this headline"></a></h3>
+<p>L’hypothèse est qu’un besoin précis nécessite d’utiliser les données précédentes. Cela implique parfois une mise en valeur de ces données et restructuration. Ici l’objectif est de construire un graph avec des noeuds et des liaisons entre ces noeuds avec des règles de gestion.</p>
+<p>Dans ce projet, j’ai volontairement utiliser python et l’orienté objet pour construire un graph en mémoire à l’aide des dataclasses (nouveauté pour moi). La classe <code class="docutils literal notranslate"><span class="pre">clients.graph.Graph</span></code> représente cela. La limite est la volumétrie de données et la complexité de certaines fonctions de recherche. Mais dans une demo, c’est pas dérangeant.</p>
+<p>En sortie de ces données, un fichier <code class="docutils literal notranslate"><span class="pre">graph.json</span></code> sous forme de dictionnaire avec la liste des noeuds et des liaisons est exporté. Voici sa forme:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id_state&quot;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+    <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;diphenhydramine&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;atccode&quot;</span><span class="p">:</span> <span class="s2">&quot;A04AD&quot;</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;american journal of veterinary research&quot;</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;gold nanoparticles synthesized from euphorbia fischeriana root by green route method alleviates the isoprenaline hydrochloride induced myocardial infarction in rats.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-01-01T00:00:00.000Z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;base_id&quot;</span><span class="p">:</span> <span class="s2">&quot;9&quot;</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;use of diphenhydramine as an adjunctive sedative for colonoscopy in patients chronically on opioids&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-01-01T00:00:00.000Z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;base_id&quot;</span><span class="p">:</span> <span class="s2">&quot;NCT01967433&quot;</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;12_17&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;node_a&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;journal of photochemistry and photobiology. b, biology&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;node_b&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;gold nanoparticles synthesized from euphorbia fischeriana root by green route method alleviates the isoprenaline hydrochloride induced myocardial infarction in rats.&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-01-01T00:00:00.000Z&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;base_id&quot;</span><span class="p">:</span> <span class="s2">&quot;9&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-01-01T00:00:00.000Z&quot;</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Cette forme permet de reconstruire facilement l’objet dataclass, c’est ce qui m’intéressait. On retrouve des noeuds qui ont plusieurs types et des liaisons qui ont aussi plusieurs types (cf documentation <code class="docutils literal notranslate"><span class="pre">clients.graph</span></code>)</p>
+<p>Usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clients build_graph<span class="se">\</span>
+    -i outputs<span class="se">\ </span><span class="c1">#charger les fichier json de l&#39;étape précédente</span>
+    -g outputs/graph.json
+<span class="c1"># 2022-03-02 10:14:46,990 - clients.graph - INFO - Construction du graph...</span>
+<span class="c1"># 2022-03-02 10:14:46,990 - clients.graph - INFO - Construction des noeuds.</span>
+</pre></div>
+</div>
+<p>Pour aller plus loin, de mon point de vue, il faudrait instancier une base orientée graph (type Neo4j) pour stocker ces informations. L’initialisation peut être pensé avec python, c’est à dire que python se charge de créer les noeuds et les liaisons à partir de la base de l’étape 1.</p>
+</div>
+<div class="section" id="exploiter-les-donnees">
+<h3>Exploiter les données<a class="headerlink" href="#exploiter-les-donnees" title="Permalink to this headline"></a></h3>
+<p>Cette étape correspond à une requête dans la base précédente (orientée graph). Dans mon cas, l’objet graph peut être instancié à tout moment à l’aide du fichier <code class="docutils literal notranslate"><span class="pre">graph.json</span></code>. La classe possède des méthodes correspondant aux requêtes suivantes:</p>
+<ol class="simple">
+<li>Ensemble des liaisons d’une ou plusieurs molécules</li>
+</ol>
+<p>La sortie: voir doc <code class="docutils literal notranslate"><span class="pre">clients.graph.Graph.get_drugs_mentions()</span></code>. Bon, ca pourrait être mieux formater en fonction des besoins…</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clients mentions<span class="se">\</span>
+    -g outputs/graph.json<span class="se">\</span>
+    -d atropine ethanol
+<span class="c1"># {&#39;atropine&#39;: [{&#39;base_id&#39;: None,</span>
+<span class="c1">#                &#39;date&#39;: &#39;2020-01-03T00:00:00.000Z&#39;,</span>
+<span class="c1">#                &#39;id&#39;: 21,</span>
+<span class="c1">#                &#39;title&#39;: &#39;comparison of pressure betamethasone release, &#39;</span>
+<span class="c1">#                         &#39;phonophoresis and dry needling in treatment of latent &#39;</span>
+<span class="c1">#                         &#39;myofascial trigger point of upper trapezius atropine &#39;</span>
+<span class="c1">#                         &#39;muscle.&#39;,</span>
+<span class="c1">#                &#39;type&#39;: 1},</span>
+<span class="c1">#               {&#39;date&#39;: &#39;2020-01-03T00:00:00.000Z&#39;,</span>
+<span class="c1">#                &#39;id&#39;: 15,</span>
+<span class="c1">#                &#39;name&#39;: &#39;the journal of maternal-fetal &amp; neonatal medicine&#39;,</span>
+<span class="c1">#                &#39;type&#39;: 3}],</span>
+<span class="c1">#  &#39;ethanol&#39;: [{&#39;base_id&#39;: &#39;6&#39;,</span>
+<span class="c1">#               &#39;date&#39;: &#39;2020-01-01T00:00:00.000Z&#39;,</span>
+<span class="c1">#               &#39;id&#39;: 27,</span>
+<span class="c1">#               &#39;title&#39;: &#39;rapid reacquisition of contextual fear following &#39;</span>
+<span class="c1">#                        &#39;extinction in mice: effects of amount of extinction, &#39;</span>
+<span class="c1">#                        &#39;tetracycline acute ethanol withdrawal, and ethanol &#39;</span>
+<span class="c1">#                        &#39;intoxication.&#39;,</span>
+<span class="c1">#               &#39;type&#39;: 1},</span>
+<span class="c1">#              {&#39;date&#39;: &#39;2020-01-01T00:00:00.000Z&#39;,</span>
+<span class="c1">#               &#39;id&#39;: 13,</span>
+<span class="c1">#               &#39;name&#39;: &#39;psychopharmacology&#39;,</span>
+<span class="c1">#               &#39;type&#39;: 3}]}</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Extraire le nom du journal qui mentionne le plus de molécules différentes</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clients query<span class="se">\</span>
+    -g outputs/graph.json
+<span class="c1"># node_b_name                                                  node_b_id</span>
+<span class="c1"># journal of emergency nursing                                 10           2</span>
+<span class="c1"># psychopharmacology                                           13           2</span>
+<span class="c1"># the journal of maternal-fetal &amp; neonatal medicine            15           2</span>
+<span class="c1"># american journal of veterinary research                      7            1</span>
+<span class="c1"># hôpitaux universitaires de genève                            8            1</span>
+<span class="c1"># journal of back and musculoskeletal rehabilitation           9            1</span>
+<span class="c1"># journal of food protection                                   11           1</span>
+<span class="c1"># journal of photochemistry and photobiology. b, biology       12           1</span>
+<span class="c1"># the journal of allergy and clinical immunology. in practice  14           1</span>
+<span class="c1"># the journal of pediatrics                                    16           1</span>
+</pre></div>
+</div>
+<p>Pour aller plus loin, de mon point de vue, il faudrait utiliser une language de requête (type Cypher pour Neo4j) afin d’utiliser les données du graph. Python ne serait qu’un intermediaire.</p>
+</div>
+</div>
+<div class="section" id="pratiques-python">
+<h2>Pratiques python<a class="headerlink" href="#pratiques-python" title="Permalink to this headline"></a></h2>
+<p>Voici la liste des pratiques de dev python abordés dans ce projet. Chaque point n’est pas forcément extrêmement développé dans ce projet, c’est dans un but de demonstration.</p>
+<ul class="simple">
+<li>Structure de package</li>
+<li>Découpage en méthode / classes</li>
 <li>CLI</li>
 <li>Logging</li>
-<li>Tests unitaires</li>
-<li>Conteneurisation</li>
+<li>Tests unitaires: dans <code class="docutils literal notranslate"><span class="pre">tests/</span></code></li>
+<li>Conteneurisation: cf <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code></li>
 <li>Documentation</li>
 <li>Environnement de dev sous docker</li>
-<li>CI/CD: github actions</li>
+<li>CI/CD: github actions dans <code class="docutils literal notranslate"><span class="pre">.github/</span></code></li>
 </ul>
 </div>
 <div class="section" id="les-repertoires">
@@ -153,6 +359,14 @@ tox -e py37
 </pre></div>
 </div>
 </div>
+<div class="section" id="github-actions">
+<h2>Github Actions<a class="headerlink" href="#github-actions" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation-actions.yml</span></code>: génère la documentation</li>
+<li><code class="docutils literal notranslate"><span class="pre">.github/workflows/publish.yml</span></code>: génère l’artifact wheel et l’image docker en la publiant sur dockerhub</li>
+<li><code class="docutils literal notranslate"><span class="pre">.github/workflows/testing-actions.yml</span></code>: réalise les tests unitaires</li>
+</ul>
+</div>
 <div class="section" id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline"></a></h2>
 <p>This package structure was inspired by Cookiecutter and Lincoln</p>
@@ -164,7 +378,7 @@ tox -e py37
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Bienvenue sur la documentation de la réponse du client S" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="clients" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

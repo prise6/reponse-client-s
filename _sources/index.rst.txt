@@ -2,11 +2,9 @@ Bienvenue sur la documentation de la réponse du client S
 =========================================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
 
    README
-   usage
    modules
 
 Indices and tables
