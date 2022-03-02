@@ -50,6 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#pratiques-python">Pratiques python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-repertoires">Les répertoires</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-importants">Les fichiers importants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cli">CLI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tester">Tester</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#github-actions">Github Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a></li>
@@ -346,6 +347,45 @@ clients data<span class="se">\</span>
 ├── docker-compose-dev.yaml         <span class="c1"># docker-compose de dev du projet</span>
 ├── Dockerfile                      <span class="c1"># construction de l&#39;image</span>
 ├── .env                            <span class="c1"># variable d&#39;environnement (optionnel)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli">
+<h2>CLI<a class="headerlink" href="#cli" title="Permalink to this headline"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clients data -h
+<span class="c1"># usage: clients data [-h] --pubmed-files PUBMED_FILES [PUBMED_FILES ...]</span>
+<span class="c1">#                     --clinical-trials-file CLINICAL_TRIALS_FILE --drug-file</span>
+<span class="c1">#                     DRUG_FILE -o OUTPUT_DIRECTORY</span>
+<span class="c1">#</span>
+<span class="c1"># optional arguments:</span>
+<span class="c1">#   -h, --help            show this help message and exit</span>
+<span class="c1">#   --pubmed-files PUBMED_FILES [PUBMED_FILES ...]</span>
+<span class="c1">#   --clinical-trials-file CLINICAL_TRIALS_FILE</span>
+<span class="c1">#   --drug-file DRUG_FILE</span>
+<span class="c1">#   -o OUTPUT_DIRECTORY, --output-directory OUTPUT_DIRECTORY</span>
+
+clients build_graph -h
+<span class="c1"># usage: clients build_graph [-h] -i INPUT_DIRECTORY -g JSON_GRAPH_FILE</span>
+<span class="c1">#</span>
+<span class="c1"># optional arguments:</span>
+<span class="c1">#   -h, --help            show this help message and exit</span>
+<span class="c1">#   -i INPUT_DIRECTORY, --input-directory INPUT_DIRECTORY</span>
+<span class="c1">#   -g JSON_GRAPH_FILE, --json-graph-file JSON_GRAPH_FILE</span>
+
+clients mentions -h
+<span class="c1"># usage: clients mentions [-h] -g JSON_GRAPH_FILE -d DRUG_NAMES [DRUG_NAMES ...]</span>
+<span class="c1">#</span>
+<span class="c1"># optional arguments:</span>
+<span class="c1">#   -h, --help            show this help message and exit</span>
+<span class="c1">#   -g JSON_GRAPH_FILE, --json-graph-file JSON_GRAPH_FILE</span>
+<span class="c1">#   -d DRUG_NAMES [DRUG_NAMES ...], --drug-names DRUG_NAMES [DRUG_NAMES ...]</span>
+
+clients query -h
+<span class="c1"># usage: clients query [-h] -g JSON_GRAPH_FILE</span>
+<span class="c1">#</span>
+<span class="c1"># optional arguments:</span>
+<span class="c1">#   -h, --help            show this help message and exit</span>
+<span class="c1">#   -g JSON_GRAPH_FILE, --json-graph-file JSON_GRAPH_FILE</span>
 </pre></div>
 </div>
 </div>

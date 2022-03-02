@@ -286,6 +286,46 @@ Voici la liste des pratiques de dev python abordés dans ce projet. Chaque point
 ├── .env                            # variable d'environnement (optionnel)
 ```
 
+
+## CLI
+
+```bash
+clients data -h
+# usage: clients data [-h] --pubmed-files PUBMED_FILES [PUBMED_FILES ...]
+#                     --clinical-trials-file CLINICAL_TRIALS_FILE --drug-file
+#                     DRUG_FILE -o OUTPUT_DIRECTORY
+#
+# optional arguments:
+#   -h, --help            show this help message and exit
+#   --pubmed-files PUBMED_FILES [PUBMED_FILES ...]
+#   --clinical-trials-file CLINICAL_TRIALS_FILE
+#   --drug-file DRUG_FILE
+#   -o OUTPUT_DIRECTORY, --output-directory OUTPUT_DIRECTORY
+
+clients build_graph -h
+# usage: clients build_graph [-h] -i INPUT_DIRECTORY -g JSON_GRAPH_FILE
+#
+# optional arguments:
+#   -h, --help            show this help message and exit
+#   -i INPUT_DIRECTORY, --input-directory INPUT_DIRECTORY
+#   -g JSON_GRAPH_FILE, --json-graph-file JSON_GRAPH_FILE
+
+clients mentions -h
+# usage: clients mentions [-h] -g JSON_GRAPH_FILE -d DRUG_NAMES [DRUG_NAMES ...]
+#
+# optional arguments:
+#   -h, --help            show this help message and exit
+#   -g JSON_GRAPH_FILE, --json-graph-file JSON_GRAPH_FILE
+#   -d DRUG_NAMES [DRUG_NAMES ...], --drug-names DRUG_NAMES [DRUG_NAMES ...]
+
+clients query -h
+# usage: clients query [-h] -g JSON_GRAPH_FILE
+#
+# optional arguments:
+#   -h, --help            show this help message and exit
+#   -g JSON_GRAPH_FILE, --json-graph-file JSON_GRAPH_FILE
+```
+
 ## Tester
 
 En utilisant `tox.ini`:
