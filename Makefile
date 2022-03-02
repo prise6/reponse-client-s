@@ -106,7 +106,7 @@ task_build_graph:
 task_mentions:
 	clients mentions\
 		-g assets/outputs/graph.json\
-		-d diphenhydramine ethanol
+		-d atropine ethanol
 
 task_query:
 	clients query\

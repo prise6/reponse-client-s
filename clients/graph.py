@@ -19,7 +19,7 @@ class Node(ABC):
 
     Attributes:
         id (int): identifiant du noeud
-        type (int): identifiant du type de noeud (variable de class *_NODE)
+        type (int): identifiant du type de noeud (variable de class \\*_NODE)
 
     |  PUBLICATION_NODE: 1, noeud de type publication
     |  CLINICAL_TRIAL_NODE: 2, noeud de type essais clinique
@@ -120,7 +120,7 @@ class Link(ABC):
 
     Attributes:
         id (str): Identifiant unique du lien
-        type (int): Identifiant du type de liaison (variable de class *_LINK)
+        type (int): Identifiant du type de liaison (variable de class \\*_LINK)
         node_a (Node): Noeud A
         node_b (Node): Noeud B
         date (str, optional): Date du lien (pratique pour le cas d'usage)

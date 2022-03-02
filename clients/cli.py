@@ -99,7 +99,7 @@ def main():
     else:
         parser.print_help()
 
-    if res:
+    if res is not None:
         print(res)
 
     return 0
